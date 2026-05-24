@@ -1,10 +1,8 @@
-// Sandboxels Mod: Culinary Craft (Universal Load Fix)
-(function culMod() {
-    // If the game isn't fully ready yet, wait 100ms and try again
-    if (typeof elements === 'undefined' || typeof behaviors === 'undefined') {
-        setTimeout(culMod, 100);
-        return;
-    }
+// Sandboxels Mod: Culinary Craft (Crash-Proof Version)
+try {
+    // Safely borrow physics behaviors from existing vanilla elements
+    var liquidPhysics = elements.water ? elements.water.behavior : null;
+    var powderPhysics = elements.sand ? elements.sand.behavior : null;
 
     // 1. MEAT SYSTEM
     elements.raw_beef = {
@@ -36,7 +34,7 @@
         stateHigh: "raw_beef"
     };
 
-    // 2. CHOCOLATE MECHANICS
+    // 2. NEW CHOCOLATE VARIANT
     elements.chocolate_bar = {
         color: "#4a2711",
         category: "food",
@@ -48,7 +46,7 @@
 
     elements.liquid_chocolate = {
         color: "#5c3317",
-        behavior: behaviors.LIQUID,
+        behavior: liquidPhysics,
         category: "food",
         state: "liquid",
         density: 1200,
@@ -61,7 +59,7 @@
     // 3. PASTA & RAMEN
     elements.raw_noodles = {
         color: "#f7dc6f",
-        behavior: behaviors.POWDER,
+        behavior: powderPhysics,
         category: "food",
         state: "solid",
         density: 1100,
@@ -82,7 +80,7 @@
 
     elements.broth = {
         color: "#d4ac0d",
-        behavior: behaviors.LIQUID,
+        behavior: liquidPhysics,
         category: "food",
         state: "liquid",
         density: 1010,
@@ -92,7 +90,7 @@
 
     elements.ramen_soup = {
         color: "#9a7d0a",
-        behavior: behaviors.LIQUID,
+        behavior: liquidPhysics,
         category: "food",
         state: "liquid",
         density: 1030,
@@ -103,7 +101,7 @@
     // 4. BREAKFAST & SAUCES
     elements.pancake_batter = {
         color: "#fef9e7",
-        behavior: behaviors.LIQUID,
+        behavior: liquidPhysics,
         category: "food",
         state: "liquid",
         density: 1150,
@@ -122,7 +120,7 @@
 
     elements.tomato_sauce = {
         color: "#922b21",
-        behavior: behaviors.LIQUID,
+        behavior: liquidPhysics,
         category: "food",
         state: "liquid",
         density: 1050,
@@ -142,6 +140,11 @@
         stateHigh: "ash"
     };
 
-    // Refresh the game user interface so everything displays perfectly
-    if (typeof updateAllElements === "function") updateAllElements();
-})();
+    // Force the game interface to display the items if pasted into console
+    if (typeof updateAllElements === "function") {
+        updateAllElements();
+    }
+
+} catch (error) {
+    console.error("Mod failed to load cleanly:", error);
+}
