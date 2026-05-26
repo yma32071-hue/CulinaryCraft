@@ -1,7 +1,3 @@
-// ==========================================
-// 1. CULINARY CRAFT CUSTOM ELEMENTS
-// ==========================================
-
 elements.baby_milk_powder = {
     color: "#b5b0a3",
     behavior: [
@@ -16,8 +12,7 @@ elements.baby_milk_powder = {
     reactions: {
         "water": { elem1: "milk", elem2: null }
     }
-};
-
+},
 elements.strawberry_powder = {
     color: "#ff6b8b",
     behavior: [
@@ -32,8 +27,7 @@ elements.strawberry_powder = {
     reactions: {
         "milk": { elem1: "strawberry_milk", elem2: null }
     }
-};
-
+},
 elements.strawberry_milk = {
     color: "#ffb3c1",
     behavior: [
@@ -46,8 +40,7 @@ elements.strawberry_milk = {
     tempHigh: 100,
     stateHigh: "steam",
     viscosity: 3
-};
-
+},
 elements.boba_pearls = {
     color: "#2b1d12",
     behavior: [
@@ -63,8 +56,7 @@ elements.boba_pearls = {
         "milk": { elem1: "boba_milk_tea", elem2: null },
         "strawberry_milk": { elem1: "boba_milk_tea", elem2: null }
     }
-};
-
+},
 elements.boba_milk_tea = {
     color: "#cc9966",
     behavior: [
@@ -76,8 +68,7 @@ elements.boba_milk_tea = {
     desc: "Sweet milk tea mixed with boba.",
     tempHigh: 100,
     stateHigh: "steam"
-};
-
+},
 elements.cake_batter = {
     color: "#f5e6ca",
     behavior: [
@@ -90,8 +81,7 @@ elements.cake_batter = {
     viscosity: 80, 
     tempHigh: 110,
     stateHigh: "baked_cake" 
-};
-
+},
 elements.baked_cake = {
     color: "#d4a373",
     behavior: [
@@ -105,16 +95,4 @@ elements.baked_cake = {
     stateHigh: "ash",
     burn: 10,
     burnTime: 30
-};
-
-// ==========================================
-// 2. INJECTING RECIPES INTO NATIVE ELEMENTS
-// ==========================================
-
-// Safely add the cake recipe to vanilla Sugar without erasing sugar's other behaviors
-if (elements.sugar) {
-    if (!elements.sugar.reactions) {
-        elements.sugar.reactions = {};
-    }
-    elements.sugar.reactions.egg = { elem1: "cake_batter", elem2: null };
 }
